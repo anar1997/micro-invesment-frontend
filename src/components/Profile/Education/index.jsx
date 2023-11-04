@@ -1,8 +1,22 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation, Routes, Route } from 'react-router-dom'
-
+import { getEducationAsync } from '../../../redux/EducationSlice/EducationSlice';
+import { getMeAsync } from '../../../redux/AuthSlice/AuthSlice';
 
 const Education = () => {
+  const dispatch = useDispatch();
+
+  let educations = useSelector((state)=>state.education.educations)
+  let me = useSelector((state)=>state.auth.me)
+
+  console.log(me);
+
+  useEffect(()=>{
+    dispatch(getMeAsync());
+    dispatch(getEducationAsync(me.id))
+  }, [])
+
   return (
     <div className='mt-4 mx-4 flex flex-col'>
       <NavLink to="profile-update" className={`rounded btn-main-bg text-center w-40 h-10 p-2 mb-2`}>Yeni əlavə et</NavLink>
@@ -19,42 +33,20 @@ const Education = () => {
           </tr>
         </thead>
         <tbody>
+          {educations.map((v, i) => (
           <tr>
-            <td className="border border-slate-700">Indiana</td>
-            <td className="border border-slate-700">Indianapolis</td>
-            <td className="border border-slate-700">Indiana</td>
-            <td className="border border-slate-700">Indianapolis</td>
-            <td className="border border-slate-700">Indiana</td>
-            <td className="border border-slate-700">Indianapolis</td>
+            <td className="border border-slate-700">{v.education_place}</td>
+            <td className="border border-slate-700">{v.education_branch}</td>
+            <td className="border border-slate-700">{v.city}</td>
+            <td className="border border-slate-700">{v.start_year}</td>
+            <td className="border border-slate-700">{v.end_year}</td>
+            <td className="border border-slate-700">{v.is_continue ? "Bəli" : "Xeyr"}</td>
             <td className='border-r border-b border-slate-700 flex justify-center'>
               <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10 edit' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
               <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10 delete' src='/src/assets/icons/remove.svg' alt="" /></NavLink>
             </td>
           </tr>
-          <tr>
-            <td className="border border-slate-700">Ohio</td>
-            <td className="border border-slate-700">Columbus</td>
-            <td className="border border-slate-700">Indiana</td>
-            <td className="border border-slate-700">Indianapolis</td>
-            <td className="border border-slate-700">Indiana</td>
-            <td className="border border-slate-700">Indianapolis</td>
-            <td className='border-r border-b border-slate-700 flex justify-center'>
-              <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
-              <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10 text-red-600' src='/src/assets/icons/remove.svg' alt="" /></NavLink>
-            </td>
-          </tr>
-          <tr>
-            <td className="border border-slate-700">Michigan</td>
-            <td className="border border-slate-700">Detroit</td>
-            <td className="border border-slate-700">Indiana</td>
-            <td className="border border-slate-700">Indianapolis</td>
-            <td className="border border-slate-700">Indiana</td>
-            <td className="border border-slate-700">Indianapolis</td>
-            <td className='border-r border-b border-slate-700 flex justify-center'>
-              <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
-              <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10 text-red-600' src='/src/assets/icons/remove.svg' alt="" /></NavLink>
-            </td>
-          </tr>
+          ))}
         </tbody>
       </table>
     </div>
