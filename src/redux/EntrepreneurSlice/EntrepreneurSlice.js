@@ -3,7 +3,7 @@ import axios from "../../axios";
 
 export const getAllEntrepreneurAsync = createAsyncThunk('getAllEntrepreneurAsync', async (values) => {
     try {
-        const res = await axios.get(`entrepreneurs/?limit=10&offset=${values.offset}&start_date__gte=${values.start_date}&end_date__gte=${values.end_date}&is_active=true`)
+        const res = await axios.get(`entrepreneurs/?limit=10&offset=${values.offset}&owner=${values.owner}&start_date_gte=${values.start_date}&end_date_gte=${values.end_date}&is_active=true`)
         return res.data;
     } catch (error) {
         console.log(error);
@@ -44,7 +44,7 @@ export const EntrepreneurSlice = createSlice({
             state.isLoading = false;
             state.entrepreneurs = action.payload.results;
             state.totalPage = action.payload.count;
-        })
+        })  
         builder.addCase(getAllEntrepreneurAsync.rejected, (state, action) => {
             state.error = action.error.message;
         })

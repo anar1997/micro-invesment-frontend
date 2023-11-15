@@ -8,7 +8,7 @@ const Education = () => {
   const dispatch = useDispatch();
 
   let educations = useSelector((state)=>state.education.educations)
-  let me = useSelector((state)=>state.auth.me)
+  let me = useSelector((state)=>state.auth.me)    
 
   console.log(me);
 
@@ -19,7 +19,7 @@ const Education = () => {
 
   return (
     <div className='mt-4 mx-4 flex flex-col'>
-      <NavLink to="profile-update" className={`rounded btn-main-bg text-center w-40 h-10 p-2 mb-2`}>Yeni əlavə et</NavLink>
+      <NavLink to="add-education" className={`rounded btn-main-bg text-center w-40 h-10 p-2 mb-2`}>Yeni əlavə et</NavLink>
       <table className="table-auto w-full">
         <thead>
           <tr>
@@ -42,7 +42,7 @@ const Education = () => {
             <td className="border border-slate-700">{v.end_year}</td>
             <td className="border border-slate-700">{v.is_continue ? "Bəli" : "Xeyr"}</td>
             <td className='border-r border-b border-slate-700 flex justify-center'>
-              <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10 edit' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
+              <NavLink to={`update-education/${v.id}`} className={`px-2 mx-2`}><img className='w-5 h-10 edit' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
               <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10 delete' src='/src/assets/icons/remove.svg' alt="" /></NavLink>
             </td>
           </tr>
