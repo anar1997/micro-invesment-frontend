@@ -1,10 +1,31 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink, useLocation, Routes, Route } from 'react-router-dom'
-import { getEducationAsync } from '../../../redux/EducationSlice/EducationSlice';
+import { deleteEducationAsync, getEducationAsync } from '../../../redux/EducationSlice/EducationSlice';
 import { getMeAsync } from '../../../redux/AuthSlice/AuthSlice';
+import { ExclamationCircleFilled } from '@ant-design/icons';
+import { Button, Modal, Space } from 'antd';
+const { confirm } = Modal;
 
 const Education = () => {
+  
+  const showDeleteConfirm = (id) => {
+    confirm({
+      title: 'Silmək istədiyinizə əminsinizmi?',
+      icon: <ExclamationCircleFilled />,
+      content: '',
+      okText: 'Bəli',
+      okType: 'danger',
+      cancelText: 'Xeyr',
+      onOk() {
+        dispatch(deleteEducationAsync({'id':id})).then(()=>{dispatch(getEducationAsync(me.id))})
+      },
+      onCancel() {
+        console.log('Cancel');
+      },
+    });
+  };
+
   const dispatch = useDispatch();
 
   let educations = useSelector((state)=>state.education.educations)
@@ -43,12 +64,21 @@ const Education = () => {
             <td className="border border-slate-700">{v.is_continue ? "Bəli" : "Xeyr"}</td>
             <td className='border-r border-b border-slate-700 flex justify-center'>
               <NavLink to={`update-education/${v.id}`} className={`px-2 mx-2`}><img className='w-5 h-10 edit' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
-              <NavLink to="profile-update" className={`px-2 mx-2`}><img className='w-5 h-10 delete' src='/src/assets/icons/remove.svg' alt="" /></NavLink>
+              <NavLink onClick={()=>{showDeleteConfirm(v.id)}} className={`px-2 mx-2`}><img className='w-5 h-10 delete' src='/src/assets/icons/remove.svg' alt="" /></NavLink>
             </td>
           </tr>
           ))}
         </tbody>
       </table>
+      <>
+      {/* <Button type="primary" onClick={showModal}>
+        Open Modal
+      </Button> */}
+      {/* <Modal title="Silmək istədiyinizə əminsinizmi?" open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <Button className='mt-5'>Bəli</Button>
+        <Button className='ml-3'>Xeyr</Button>
+      </Modal> */}
+     </>
     </div>
   )
 }

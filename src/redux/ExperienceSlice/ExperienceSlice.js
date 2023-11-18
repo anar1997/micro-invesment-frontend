@@ -43,6 +43,17 @@ export const putExperienceAsync = createAsyncThunk('putExperienceAsync', async (
     }
 })
 
+export const deleteExperienceAsync = createAsyncThunk('deleteExperienceAsync', async ({id}) => {
+    try {
+        const res = await axios.delete(`/users/experiences/${id}/`)
+        return res.data
+    } catch (error) {
+        console.log(error)
+        // If the API call fails, the error will be thrown and caught here.
+        throw {'message': error.response.data.detail};  
+    }
+})
+
 export const ExperienceSlice = createSlice({
     name: 'auth',
     initialState: {
@@ -102,6 +113,19 @@ export const ExperienceSlice = createSlice({
             console.log(action.payload);
         })
         builder.addCase(getExperienceDetailAsync.rejected, (state, action) => {
+            state.error = action.error.message
+        })
+
+        //deleteExperience
+        builder.addCase(deleteExperienceAsync.pending, (state, action) => {
+            state.isLoading = true;
+        })
+        builder.addCase(deleteExperienceAsync.fulfilled, (state, action) => {
+            state.isLoading = false;
+            state.successMsg = action.payload
+        })
+        builder.addCase(deleteExperienceAsync.rejected, (state, action) => {
+            state.isLoading = false;
             state.error = action.error.message
         })
     }

@@ -35,7 +35,7 @@ const AddExperience = () => {
 
     return (
         <div className='mt-10 mb-10 sm:mx-auto sm:w-full sm:max-w-sm'>
-            <form className='space-y-6'>
+            <form className='space-y-6' onSubmit={formik.handleSubmit}>
                 <AuthInput
                     label="Müəssisə"
                     id="experience_place"
@@ -80,7 +80,7 @@ const AddExperience = () => {
                     label="Başlanğıc tarixi"
                     id="start_year"
                     name="start_year"
-                    type="date"
+                    type="number"
                     style={style}
                     value={formik.values.start_year}
                     onChange={formik.handleChange}
@@ -92,7 +92,7 @@ const AddExperience = () => {
                             label="Bitmə tarixi"
                             id="end_year"
                             name="end_year"
-                            type="date"
+                            type="number"
                             style={style}
                             value={formik.values.end_year}
                             onChange={formik.handleChange}

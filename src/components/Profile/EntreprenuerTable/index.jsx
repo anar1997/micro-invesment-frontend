@@ -26,7 +26,7 @@ const EntreprenuerTable = () => {
 
   useEffect(() => {
     dispatch(getMeAsync());
-    dispatch(getEntrepreneurTableAsync(me.id))
+    dispatch(getEntrepreneurTableAsync(me ? me.id : ""))
   }, [])
 
   return (

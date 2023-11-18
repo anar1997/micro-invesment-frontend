@@ -43,9 +43,9 @@ export const putEducationAsync = createAsyncThunk('putEducationAsync', async (da
     }
 })
 
-export const deleteEducationAsync = createAsyncThunk('deleteEducationAsync', async (data) => {
+export const deleteEducationAsync = createAsyncThunk('deleteEducationAsync', async ({id}) => {
     try {
-        const res = await axios.delete(`/users/educations/1/`, data)
+        const res = await axios.delete(`/users/educations/${id}/`)
         return res.data
     } catch (error) {
         console.log(error)
@@ -123,11 +123,11 @@ export const EducationSlice = createSlice({
         builder.addCase(deleteEducationAsync.pending, (state, action) => {
             state.isLoading = true;
         })
-        builder.addCase(deleteEducationAsync.pending, (state, action) => {
+        builder.addCase(deleteEducationAsync.fulfilled, (state, action) => {
             state.isLoading = false;
             state.successMsg = action.payload
         })
-        builder.addCase(deleteEducationAsync.pending, (state, action) => {
+        builder.addCase(deleteEducationAsync.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.error.message
         })

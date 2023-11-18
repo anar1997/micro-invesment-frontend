@@ -2,7 +2,6 @@ import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 import style from "./style.module.css"
 import AuthInput from '../../../InputComponents/AuthInput';
-import RadioInput from '../../../InputComponents/RadioInput';
 import { useFormik } from 'formik';
 import { postEducationAsync } from '../../../../redux/EducationSlice/EducationSlice';
 import { useNavigate } from 'react-router-dom';
