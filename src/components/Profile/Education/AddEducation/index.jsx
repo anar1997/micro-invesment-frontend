@@ -5,6 +5,7 @@ import AuthInput from '../../../InputComponents/AuthInput';
 import { useFormik } from 'formik';
 import { postEducationAsync } from '../../../../redux/EducationSlice/EducationSlice';
 import { useNavigate } from 'react-router-dom';
+import CheckInput from '../../../InputComponents/CheckInput';
 
 
 const AddEducation = () => {
@@ -87,7 +88,7 @@ const AddEducation = () => {
                     />)
                 }
 
-                <AuthInput
+                <CheckInput
                     label="Davam edirmi"    
                     id="is_continue"
                     name="is_continue"

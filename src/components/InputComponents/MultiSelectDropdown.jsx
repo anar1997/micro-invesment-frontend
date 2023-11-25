@@ -16,12 +16,14 @@ function MultiSelectDropdown({label, id, name, type, value, options, onChange, o
                 id={id}
                 name={name}
                 value={value}
-                options={options}
+                type={type}
+                options={options}   
                 onChange={onChange}
                 onBlur={onBlur}
                 className="basic-multi-select"
                 classNamePrefix="select"
                 isSearchable={true}
+                style={style}
             />
             </div>
             {

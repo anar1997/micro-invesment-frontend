@@ -39,7 +39,7 @@ const Experience = () => {
   }, [])
 
   return (
-    <div className='mt-4 mx-4 flex flex-col'>
+    <div className='mt-4 mx-4 flex flex-col overflow-auto h-72'>
       <NavLink to="add-experience" className={`rounded btn-main-bg text-center w-40 h-10 p-2 mb-2`}>Yeni əlavə et</NavLink>
       <table className="table-auto w-full">
         <thead>
@@ -57,13 +57,13 @@ const Experience = () => {
         <tbody>
           {experiences.map((v, i) => (
           <tr key={"experience" + v.id}> 
-            <td className="border border-slate-700">{v.experience_place}</td>
-            <td className="border border-slate-700">{v.position}</td>
-            <td className="border border-slate-700">{v.description}</td>
-            <td className="border border-slate-700">{v.city}</td>
-            <td className="border border-slate-700">{v.start_year}</td>
-            <td className="border border-slate-700">{v.end_year}</td>
-            <td className="border border-slate-700">{v.is_continue ? "Bəli" : "Xeyr"}</td>
+            <td className="border border-slate-700 pl-2">{v.experience_place}</td>
+            <td className="border border-slate-700 pl-2">{v.position}</td>
+            <td className="border border-slate-700 pl-2">{v.description}</td>
+            <td className="border border-slate-700 pl-2">{v.city}</td>
+            <td className="border border-slate-700 pl-2">{v.start_year}</td>
+            <td className="border border-slate-700 pl-2">{v.end_year}</td>
+            <td className="border border-slate-700 pl-2">{v.is_continue ? "Bəli" : "Xeyr"}</td>
             <td className='border-r border-b border-slate-700 flex justify-center'>
               <NavLink to={`update-experience/${v.id}`} className={`px-2 mx-2`}><img className='w-5 h-10 edit' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
               <NavLink onClick={()=>{showDeleteConfirm(v.id)}} className={`px-2 mx-2`}><img className='w-5 h-10 delete' src='/src/assets/icons/remove.svg' alt="" /></NavLink>

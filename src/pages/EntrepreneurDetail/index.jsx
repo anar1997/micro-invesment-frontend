@@ -3,7 +3,9 @@ import style from "./style.module.css"
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { getEntrepreneurDetailAsync } from '../../redux/EntrepreneurSlice/EntrepreneurSlice'
-import { getMeAsync } from '../../redux/AuthSlice/AuthSlice'
+import { useFormik } from 'formik'
+import { postInvestmentAsync, resetInvestmentSlice } from '../../redux/InvestmentSlice/InvestmentSlice'
+import ResponseMessage from '../../components/ResponseMessage'
 
 function EntrepreneurDetail() {
   const dispatch = useDispatch();
@@ -13,6 +15,22 @@ function EntrepreneurDetail() {
   let entrepreneur = useSelector((state)=>state.entrepreneur.entrepreneur)
   let me = useSelector((state)=>state.auth.me)
 
+  let successMsg = useSelector((state) => state.investment.successMsg)
+  let error = useSelector((state) => state.investment.error)
+
+  const formik = useFormik({
+    initialValues: {
+      // investor: "",
+      entrepreneur: "",
+      amount: 0
+    },
+    onSubmit: (values) => {
+      // values.investor = me.id
+      values.entrepreneur = entrepreneur.id
+      dispatch(postInvestmentAsync(values))
+    }
+  })
+
   useEffect(()=>{
     dispatch(getEntrepreneurDetailAsync(id))
   },[])
@@ -20,6 +38,14 @@ function EntrepreneurDetail() {
 
   return (
     <>
+        {
+          successMsg ? (<ResponseMessage message={successMsg} type="success" slice={resetInvestmentSlice()} />) : ""
+        }
+
+        {
+          error ? (<ResponseMessage message={error} type="error" slice={resetInvestmentSlice()} />) : ""
+        }
+
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 w-full">
             <h1 className='text-6xl text-center mt-10'>{entrepreneur.project_name}</h1>
             <hr className='m-10' />
@@ -133,10 +159,10 @@ function EntrepreneurDetail() {
                           </div>
                         </div>
                     </div>
-                    <form className={`${style.entrepreneur_invest_form} ${style.entrepreneur_detail} mt-3 w-full flex flex-col justify-between p-4 rounded`}>
+                    <form onSubmit={formik.handleSubmit} className={`${style.entrepreneur_invest_form} ${style.entrepreneur_detail} mt-3 w-full flex flex-col justify-between p-4 rounded`}>
                         <label htmlFor="invest_amount">Yatırım məbləği:</label>
-                        <input id='invest_amount' type="number" step="0.01" min={0}/>
-                        <button className='rounded'>Yatırım et</button>
+                        <input id='invest_amount' type="number" name='amount' value={formik.values.amount} onBlur={formik.handleBlur} onChange={formik.handleChange} step="0.01" min={0}/>
+                        <button type='submit' className='rounded'>Yatırım et</button>
                     </form>
                 </div>
             </div>

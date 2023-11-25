@@ -18,7 +18,7 @@ export const postExperienceAsync = createAsyncThunk('postExperienceSlice', async
     } catch (error) {
         console.log(error)
         // If the API call fails, the error will be thrown and caught here.
-        throw {'message': error.response.data.detail};
+        throw {'message': error.response.data.data};
     }
 })
 
@@ -63,7 +63,11 @@ export const ExperienceSlice = createSlice({
         error: null,
         successMsg: null,
     },
-    reducers: {},
+    reducers: {
+        resetExperienceSlice : (state) => {
+            return {...state, successMsg: null, error: null}
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getExperienceAsync.pending, (state, action) => {
             state.isLoading = true;
@@ -83,11 +87,12 @@ export const ExperienceSlice = createSlice({
         })
         builder.addCase(postExperienceAsync.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.successMsg = action.payload
+            state.successMsg = action.payload.detail
         })
         builder.addCase(postExperienceAsync.rejected, (state, action) => {
             state.isLoading = false;
             state.error = action.error.message
+            console.log(action.error);
         })
 
         //put reducers
@@ -131,4 +136,5 @@ export const ExperienceSlice = createSlice({
     }
 })
 
+export const {resetExperienceSlice} = ExperienceSlice.actions
 export default ExperienceSlice.reducer;

@@ -17,6 +17,16 @@ function Register() {
     const navigate = useNavigate()
 
     let users = useSelector((state) => state.auth.users)
+    let usersData = []
+    
+    if(users ){
+        console.log("burdayam");
+        usersData = users.map((result)=> ({
+            value: result.id,
+            label: `${result.user.first_name} ${result.user.last_name}` 
+        }))
+    }    
+   
 
     const formik = useFormik({
         initialValues: {
@@ -39,8 +49,8 @@ function Register() {
             password: "",
         },
         onSubmit: (values) => {
-            console.log(values);
-            console.log(values.birthdate);
+            console.log('burdayam');
+            // values.references === users
             dispatch(postRegisterAsync(values));
         },
         validationSchema: validations,
@@ -49,9 +59,18 @@ function Register() {
     let successMsg = useSelector((state) => state.auth.successMsg)
     let errorMsg = useSelector((state) => state.auth.error)
 
-    // useEffect(() => {
-    //     dispatch(getAllUsersAsync())
-    // })
+    useEffect(() => {
+        dispatch(getAllUsersAsync({
+            birthdate: "",
+            marital_status: "",
+            employment_status: "",
+            housing_status: "",
+            phone_number: "",
+            monthly_income: "",
+            monthly_income__gte: "",
+            monthly_income__lte: ""
+        }))
+    }, [dispatch])
 
 
     const access = localStorage.getItem("access");
@@ -297,9 +316,11 @@ function Register() {
                             label="Referanslar"
                             id="references"
                             name="references"
-                            options={users}
-                            value={formik.values.references}
-                            onChange={formik.handleChange}
+                            options={usersData}  
+                            onChange={(e)=>{
+                                formik.setFieldValue("references", e.value);
+                                console.log(usersData);
+                            }}
                             onBlur={formik.handleBlur}
                             touched={formik.touched.references}
                             error={formik.errors.references}

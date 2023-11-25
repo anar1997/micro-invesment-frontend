@@ -56,13 +56,13 @@ const Orders = () => {
         <tbody>
           {orders.map((v, i) => (
             <tr>
-              <td className='border border-slate-700'>{v.project_name}</td>
-              <td className='border border-slate-700'>{v.total_investment}</td>
-              <td className='border border-slate-700'>{v.gross_income}</td>
-              <td className='border border-slate-700'>{v.final_profit}</td>
-              <td className='border border-slate-700'>{v.finished_date}</td>
-              <td className='border border-slate-700'>{v.start_date}</td>
-              <td className='border border-slate-700'>{v.end_date}</td>
+              <td className='border border-slate-700 pl-2'>{v.project_name}</td>
+              <td className='border border-slate-700 pl-2'>{v.total_investment}</td>
+              <td className='border border-slate-700 pl-2'>{v.gross_income}</td>
+              <td className='border border-slate-700 pl-2'>{v.final_profit}</td>
+              <td className='border border-slate-700 pl-2'>{v.finished_date}</td>
+              <td className='border border-slate-700 pl-2'>{v.start_date}</td>
+              <td className='border border-slate-700 pl-2'>{v.end_date}</td>
             </tr>
           ))}
         </tbody>

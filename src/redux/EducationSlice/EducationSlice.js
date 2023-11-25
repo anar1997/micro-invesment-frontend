@@ -18,7 +18,7 @@ export const postEducationAsync = createAsyncThunk('postEducationSlice', async(d
     } catch (error) {
         console.log(error)
         // If the API call fails, the error will be thrown and caught here.
-        throw {'message': error.response.data.detail};
+        throw {'message': error.response.data.data};
     }
 })
 
@@ -63,7 +63,11 @@ export const EducationSlice = createSlice({
         error: null,
         successMsg: null,
     },
-    reducers: {},
+    reducers: {
+        resetEducationSlice : (state) => {
+            return {...state, successMsg : null, error : null}
+        }
+    },
     extraReducers: (builder) => {
         builder.addCase(getEducationAsync.pending, (state, action) => {
             state.isLoading = true;
@@ -83,7 +87,8 @@ export const EducationSlice = createSlice({
         })
         builder.addCase(postEducationAsync.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.successMsg = action.payload
+            state.successMsg = action.payload.detail
+            console.log(action.payload);
         })
         builder.addCase(postEducationAsync.rejected, (state, action) => {
             state.isLoading = false;
@@ -134,4 +139,5 @@ export const EducationSlice = createSlice({
     }
 })
 
+export const {resetEducationSlice} = EducationSlice.actions;
 export default EducationSlice.reducer;

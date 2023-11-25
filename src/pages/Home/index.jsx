@@ -24,6 +24,7 @@ function Home() {
       offset: "",
       start_date: "",
       end_date: "",
+      owner: "",
     },
     onSubmit: (values) => {
       values.start_date = startDate;

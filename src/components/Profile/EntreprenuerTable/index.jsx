@@ -56,13 +56,13 @@ const EntreprenuerTable = () => {
         <tbody>
           {investments.map((v, i) => (
             <tr key={"entrepreneur" + v.id}>
-              <td className='border border-slate-700'>{v.entrepreneur.project_name}</td>
-              <td className='border border-slate-700'>{v.amount}</td>
-              <td className='border border-slate-700'>{v.profit}</td>
-              <td className='border border-slate-700'>{v.final_profit}</td>
-              <td className='border border-slate-700'>{v.investment_date}</td>
-              <td className='border border-slate-700'>{v.entrepreneur.start_date}</td>
-              <td className='border border-slate-700'>{v.entrepreneur.end_date}</td>
+              <td className='border border-slate-700 pl-2'>{v.entrepreneur.project_name}</td>
+              <td className='border border-slate-700 pl-2'>{v.amount}</td>
+              <td className='border border-slate-700 pl-2'>{v.profit}</td>
+              <td className='border border-slate-700 pl-2'>{v.final_profit}</td>
+              <td className='border border-slate-700 pl-2'>{v.investment_date}</td>
+              <td className='border border-slate-700 pl-2'>{v.entrepreneur.start_date}</td>
+              <td className='border border-slate-700 pl-2'>{v.entrepreneur.end_date}</td>
             </tr>
           ))}
         </tbody>

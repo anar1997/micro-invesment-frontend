@@ -5,6 +5,7 @@ import style from "./style.module.css"
 import { useDispatch, useSelector } from 'react-redux';
 import { getExperienceDetailAsync, putExperienceAsync } from '../../../../redux/ExperienceSlice/ExperienceSlice';
 import { useNavigate, useParams } from 'react-router-dom';
+import CheckInput from '../../../InputComponents/CheckInput';
 
 
 const UpdateExperience = () => {
@@ -125,7 +126,7 @@ const UpdateExperience = () => {
                         />
                     )
                 }
-                <AuthInput
+                <CheckInput
                     label="Davam edirmi"
                     id="is_continue"
                     name="is_continue"

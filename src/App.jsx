@@ -38,6 +38,7 @@ function App() {
             </>
           ) : (
             <div className='flex flex-col h-screen justify-between'>
+              <div>
                 <Header />
                 <div>
                   <Routes>
@@ -57,7 +58,8 @@ function App() {
                     <Route path='*' element={<NotFoundPage/>} />
                   </Routes>
                 </div>
-                <Footer />
+              </div>
+              <Footer />
             </div>
           )
         }

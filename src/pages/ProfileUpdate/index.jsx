@@ -6,11 +6,13 @@ import RadioInput from "../../components/InputComponents/RadioInput";
 import style from "./style.module.css"
 import FileInput from "../../components/InputComponents/FileInput";
 import TextAreaInput from "../../components/InputComponents/TextAreaInput";
-import { getMeAsync } from "../../redux/AuthSlice/AuthSlice";
+import { getMeAsync, putUserAsync } from "../../redux/AuthSlice/AuthSlice";
+import { useNavigate } from "react-router-dom";
 
 
 function ProfileUpdate() {
     const dispatch = useDispatch();
+    const navigate = useNavigate()
 
     let me = useSelector((state) => state.auth.me)
     
@@ -33,7 +35,9 @@ function ProfileUpdate() {
             business_activities: me ? me.business_activities || "" : ""
         },
         onSubmit: (values) => {
+            values.id = me ? me.id : ""
             console.log(values);
+            dispatch(putUserAsync(values)).then(()=>{navigate('/profile')})
         },
     });
 
@@ -165,13 +169,13 @@ function ProfileUpdate() {
                                 <RadioInput
                                     label="Evli"
                                     id="married"
-                                    name="marital_status"
+                                    name="marital_status" 
                                     type="radio"
                                     value="married"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
-                                    checked={me ? me.marital_status : "" === "married"}
+                                    checked={formik.values.marital_status=="married" ? "checked" : ""}
                                 />
                                 <RadioInput
                                     label="Subay"
@@ -182,7 +186,7 @@ function ProfileUpdate() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
-                                    checked={me ? me.marital_status : "" === "single"}
+                                    checked={formik.values.marital_status=="single" ? "checked" : ""}
                                 />
                             </div>
                         </div>
@@ -201,7 +205,7 @@ function ProfileUpdate() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
-                                    checked={me ? me.employment_status : "" === "working"}
+                                    checked={formik.values.employment_status == "working" ? "checked" : ""}
                                 />
                                 <RadioInput
                                     label="İşsizəm"
@@ -212,7 +216,7 @@ function ProfileUpdate() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
-                                    checked={me ? me.employment_status : "" === "unemployed"}
+                                    checked={formik.values.employment_status == "unemployed" ? "checked" : ""}
                                 />
                             </div>
                         </div>
@@ -231,7 +235,7 @@ function ProfileUpdate() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
-                                    checked={me ? me.housing_status : "" == "own home"}
+                                    checked={formik.values.housing_status == "own home" ? "checked" : ""}
                                 />
                                 <RadioInput
                                     label="Kirayədə qalıram"
@@ -242,7 +246,7 @@ function ProfileUpdate() {
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
-                                    checked={me ? me.housing_status : "" === "renting"}
+                                    checked={formik.values.housing_status == "renting" ? "checked" : ""}
                                 />
                             </div>
                         </div>

@@ -2,10 +2,10 @@ import { useFormik } from 'formik'
 import React from 'react'
 import AuthInput from '../../../InputComponents/AuthInput';
 import style from "./style.module.css"
-import RadioInput from '../../../InputComponents/RadioInput';
 import { useDispatch } from 'react-redux';
 import { postExperienceAsync } from '../../../../redux/ExperienceSlice/ExperienceSlice';
 import { useNavigate } from 'react-router-dom';
+import CheckInput from '../../../InputComponents/CheckInput';
 
 
 const AddExperience = () => {
@@ -100,7 +100,7 @@ const AddExperience = () => {
                         />
                     )
                 }
-                <AuthInput
+                <CheckInput
                     label="Davam edirmi"
                     id="is_continue"
                     name="is_continue"
