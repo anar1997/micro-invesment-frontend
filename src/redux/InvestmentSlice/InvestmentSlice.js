@@ -19,7 +19,7 @@ export const postInvestmentAsync = createAsyncThunk('postInvestmentAsync', async
     } catch (error) {
         console.log(error);
         // If the API call fails, the error will be thrown and caught here.
-        throw {'message': error.response.data.data};
+        throw {'message': error.response.data.detail};
     }
 })
 

@@ -20,12 +20,12 @@ function EntrepreneurDetail() {
 
   const formik = useFormik({
     initialValues: {
-      // investor: "",
+      investor: "",
       entrepreneur: "",
       amount: 0
     },
     onSubmit: (values) => {
-      // values.investor = me.id
+      values.investor = me.id
       values.entrepreneur = entrepreneur.id
       dispatch(postInvestmentAsync(values))
     }

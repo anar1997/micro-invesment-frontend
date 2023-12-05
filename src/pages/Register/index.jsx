@@ -17,9 +17,9 @@ function Register() {
     const navigate = useNavigate()
 
     let users = useSelector((state) => state.auth.users)
-    let usersData = []
-    
-    if(users ){
+    let usersData = []  
+
+    if(users){
         console.log("burdayam");
         usersData = users.map((result)=> ({
             value: result.id,
@@ -27,7 +27,6 @@ function Register() {
         }))
     }    
    
-
     const formik = useFormik({
         initialValues: {
             first_name: "",
@@ -51,9 +50,14 @@ function Register() {
         onSubmit: (values) => {
             console.log('burdayam');
             // values.references === users
-            dispatch(postRegisterAsync(values));
+            let refer = []
+            values.references.map((re)=>(
+                refer.push(re.value)
+            ))
+            values.references = refer
+            dispatch(postRegisterAsync(values)).then(()=>{navigate('/login')});
         },
-        validationSchema: validations,
+        // validationSchema: validations,
     });
 
     let successMsg = useSelector((state) => state.auth.successMsg)
@@ -179,7 +183,7 @@ function Register() {
                                     id="married"
                                     name="marital_status"
                                     type="radio"
-                                    value={formik.values.marital_status}
+                                    value="married"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
@@ -189,7 +193,7 @@ function Register() {
                                     id="single"
                                     name="marital_status"
                                     type="radio"
-                                    value={formik.values.marital_status}
+                                    value="single"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
@@ -207,7 +211,7 @@ function Register() {
                                     id="working"
                                     name="employment_status"
                                     type="radio"
-                                    value={formik.values.employment_status}
+                                    value="working"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
@@ -217,7 +221,7 @@ function Register() {
                                     id="unemployed"
                                     name="employment_status"
                                     type="radio"
-                                    value={formik.values.employment_status}
+                                    value="unemployed"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
@@ -235,7 +239,7 @@ function Register() {
                                     id="own_home"
                                     name="housing_status"
                                     type="radio"
-                                    value={formik.values.housing_status}
+                                    value="own home"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
@@ -245,7 +249,7 @@ function Register() {
                                     id="renting"
                                     name="housing_status"
                                     type="radio"
-                                    value={formik.values.housing_status}
+                                    value="renting"
                                     onChange={formik.handleChange}
                                     onBlur={formik.handleBlur}
                                     style={style}
@@ -305,8 +309,8 @@ function Register() {
                             id="profile_picture"
                             name="profile_picture"
                             type="file"
-                            value={formik.values.profile_picture}
-                            onChange={formik.handleChange}
+                            onChange={(e)=>{
+                                formik.setFieldValue("profile_picture", e.target.files[0])}}
                             onBlur={formik.handleBlur}
                             touched={formik.touched.profile_picture}
                             error={formik.errors.profile_picture}
@@ -318,8 +322,8 @@ function Register() {
                             name="references"
                             options={usersData}  
                             onChange={(e)=>{
-                                formik.setFieldValue("references", e.value);
-                                console.log(usersData);
+                                formik.setFieldValue("references", e);
+                                // console.log(e);
                             }}
                             onBlur={formik.handleBlur}
                             touched={formik.touched.references}

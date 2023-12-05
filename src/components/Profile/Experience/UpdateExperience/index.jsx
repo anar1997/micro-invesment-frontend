@@ -106,7 +106,7 @@ const UpdateExperience = () => {
                     label="Başlanğıc tarixi"
                     id="start_year"
                     name="start_year"
-                    type="date"
+                    type="number"
                     style={style}
                     value={formik.values.start_year}
                     onChange={formik.handleChange}
@@ -118,7 +118,7 @@ const UpdateExperience = () => {
                             label="Bitmə tarixi"
                             id="end_year"
                             name="end_year"
-                            type="date"
+                            type="number"
                             style={style}
                             value={formik.values.end_year}
                             onChange={formik.handleChange}

@@ -19,11 +19,11 @@ export const postRegisterAsync = createAsyncThunk('postRegisterAsync', async (da
         formData.append("email", data.email)
         formData.append("birthdate", data.birthdate)
         formData.append("address", data.address)
-        formData.append("martial_status", data.martial_status)
+        formData.append("marital_status", data.marital_status)
         formData.append("employment_status", data.employment_status)
         formData.append("housing_status", data.housing_status)
         formData.append("phone_number", data.phone_number)
-        formData.append("credit_card_number", data.credit_card_number)
+        formData.append("credit_cart_number", data.credit_cart_number)
         formData.append("debt_amount", data.debt_amount)
         formData.append("monthly_income", data.monthly_income)
         formData.append("about", data.about)
@@ -53,7 +53,24 @@ export const getMeAsync = createAsyncThunk('getMeAsync', async () => {
 
 export const putUserAsync = createAsyncThunk('putUserAsync', async (data) => {
     try {
-        const res = await axios.put(`users/${data.id}/`, data)
+        const formData = new FormData()
+        formData.append("first_name", data.first_name)
+        formData.append("last_name", data.last_name)
+        formData.append("email", data.email)
+        formData.append("birthdate", data.birthdate)
+        formData.append("address", data.address)
+        formData.append("marital_status", data.marital_status)
+        formData.append("employment_status", data.employment_status)
+        formData.append("housing_status", data.housing_status)
+        formData.append("phone_number", data.phone_number)
+        formData.append("credit_cart_number", data.credit_cart_number)
+        formData.append("debt_amount", data.debt_amount)
+        formData.append("monthly_income", data.monthly_income)
+        formData.append("about", data.about)
+        formData.append("profile_picture", data.profile_picture)
+        formData.append("business_activities", data.business_activities)
+        console.log(formData);
+        const res = await axios.put(`users/${data.id}/`, formData, {headers: {"Content-Type" : "multipart/form-data", "Authorization" : ""}})
         return res.data
     } catch (error) {
         console.log(error)
@@ -85,7 +102,11 @@ export const AuthSlice = createSlice({
         error: null,
         successMsg: null
     },
-    reducers: {},
+    reducers: {
+        resetAuthSlice : (state) => {
+            return {...state, successMsg: null, error: null}
+        }
+    },
     extraReducers: (builder) => {
         // Login Reducers
         builder.addCase(postLoginAsync.pending, (state, action) => {
@@ -158,4 +179,5 @@ export const AuthSlice = createSlice({
     }
 })
 
+export const {resetAuthSlice} = AuthSlice.actions
 export default AuthSlice.reducer;

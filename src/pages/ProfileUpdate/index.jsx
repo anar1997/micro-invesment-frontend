@@ -303,8 +303,8 @@ function ProfileUpdate() {
                             id="profile_picture"
                             name="profile_picture"
                             type="file"
-                            value={formik.values.profile_picture}
-                            onChange={formik.handleChange}
+                            onChange={(e)=>{
+                                formik.setFieldValue("profile_picture", e.target.files[0])}}
                             onBlur={formik.handleBlur}
                             touched={formik.touched.profile_picture}
                             error={formik.errors.profile_picture}

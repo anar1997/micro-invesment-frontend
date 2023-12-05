@@ -2,15 +2,19 @@ import { useEffect, useState } from 'react'
 import { NavLink, useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { useFormik } from 'formik';
-import { postLoginAsync } from '../../redux/AuthSlice/AuthSlice';
+import { postLoginAsync, resetAuthSlice } from '../../redux/AuthSlice/AuthSlice';
 import validations from './validation';
 import style from "./style.module.css"
 import AuthInput from '../../components/InputComponents/AuthInput';
+import ResponseMessage from '../../components/ResponseMessage';
 
 
 function Login() {
   const dispatch = useDispatch();
   const navigate = useNavigate()
+
+  let successMsg = useSelector((state) => state.auth.successMsg)
+  let error = useSelector((state) => state.auth.error)
 
   const formik = useFormik({
     initialValues: {
@@ -22,7 +26,7 @@ function Login() {
       .unwrap()
       .then(() => {
         navigate("/");
-        window.location.reload();
+        window.location.reload(); 
       })
     },
     validationSchema: validations
@@ -41,6 +45,14 @@ function Login() {
 
   return (
     <>
+        {
+          successMsg ? (<ResponseMessage message={successMsg} type="success" slice = {resetAuthSlice()}/>) : ""
+        }
+
+        {
+          error ? (<ResponseMessage message={error} type="error" slice = {resetAuthSlice()}/>) : ""
+        }
+
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         {
           errorMsg && (
