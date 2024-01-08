@@ -25,6 +25,9 @@ function Home() {
       start_date: "",
       end_date: "",
       owner: "",
+      project_name_icontains: "",
+      is_finished: false,
+      is_active: true
     },
     onSubmit: (values) => {
       values.start_date = startDate;
@@ -121,7 +124,7 @@ function Home() {
                 }
             </div>
           </div>
-          {/* ***************** Pagination ********************* */}
+          {/* ***************** Pagination ********************* */}  
           <div>
           <div className="flex justify-center mt-10">
 

@@ -14,6 +14,7 @@ function Header() {
   const navigate = useNavigate();
 
   let me = useSelector((state) => state.auth.me)
+  console.log(me);
 
   useEffect(() => {
     dispatch(getMeAsync());
@@ -35,6 +36,7 @@ function Header() {
   const navigation = [
     { name: 'Ana Səhifə', href: '/', current: location.pathname == '/' ? true : false },
     { name: 'Haqqımızda', href: '/about', current: location.pathname == '/about' ? true : false },
+    { name: 'Sifariş əlavə et', href: '/add-order', current: location.pathname == '/add-order' ? true : false },
   ]
   
   function classNames(...classes) {
@@ -115,6 +117,18 @@ function Header() {
                     leaveTo="transform opacity-0 scale-95"
                   >
                     <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                      {me && me.user.is_staff &&
+                        <Menu.Item>
+                        {() => (
+                          <NavLink
+                            to="/admin"
+                            className={classNames(location.pathname == '/admin' ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                          >
+                            Admin
+                          </NavLink>
+                        )}
+                        </Menu.Item>
+                      }
                       <Menu.Item>
                         {() => (
                           <NavLink

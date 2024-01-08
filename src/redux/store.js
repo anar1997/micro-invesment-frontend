@@ -6,6 +6,8 @@ import EducationSlice from "./EducationSlice/EducationSlice";
 import ExperienceSlice from "./ExperienceSlice/ExperienceSlice";
 import EntrepreneurTableSlice from "./EntreprenuerTableSlice/EntrepreneurTableSlice";
 import OrderSlice from "./OrderSlice/OrderSlice";
+import AddOrderSlice from "./AddOrderSlice/AddOrderSlice";
+import AddPictureSlice from "./AddOrderSlice/AddPictureSlice";
 
 export default configureStore({
     reducer: {
@@ -16,5 +18,7 @@ export default configureStore({
         experience: ExperienceSlice,
         entrepreneurTable: EntrepreneurTableSlice,
         order: OrderSlice,
+        addOrder: AddOrderSlice,
+        addPicture: AddPictureSlice
     }
 })

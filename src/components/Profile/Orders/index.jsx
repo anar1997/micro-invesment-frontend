@@ -30,7 +30,7 @@ const Orders = () => {
   }, [])
 
   return (
-    <div className='mx-4 flex flex-col'>
+    <div className='mx-4 flex flex-col overflow-auto h-72'>
       <Pagination 
          onChange={(e) => {
           changePage(e);

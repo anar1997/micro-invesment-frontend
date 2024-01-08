@@ -3,7 +3,7 @@ import axios from "../../axios";
 
 export const getAllEntrepreneurAsync = createAsyncThunk('getAllEntrepreneurAsync', async (values) => {
     try {
-        const res = await axios.get(`entrepreneurs/?limit=10&offset=${values.offset}&owner=${values.owner}&start_date_gte=${values.start_date}&end_date_gte=${values.end_date}&is_active=true`)
+        const res = await axios.get(`entrepreneurs/?limit=10&offset=${values.offset}&project_name__icontains=${values.project_name__icontains}&owner=${values.owner}&start_date__gte=${values.start_date__gte}&end_date__gte=${values.start_date__gte}&is_finished=${values.is_finished}&is_active=${values.is_active}`)
         return res.data;
     } catch (error) {
         console.log(error);

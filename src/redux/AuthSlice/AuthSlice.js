@@ -81,7 +81,7 @@ export const putUserAsync = createAsyncThunk('putUserAsync', async (data) => {
 
 export const getAllUsersAsync = createAsyncThunk('getAllUsersAsync', async (values) => {
     try {
-        const res = await axios.get(`users/?birthdate=${values.birthdate}&marital_status=${values.marital_status}&employment_status=${values.employment_status}&housing_status=${values.housing_status}&phone_number=${values.phone_number}&monthly_income=${values.monthly_income}&monthly_income__gte=${values.monthly_income__gte}&monthly_income__lte=${values.monthly_income__lte}`, {headers: {"Authorization": ""}})
+        const res = await axios.get(`users/?birthdate=${values.birthdate}&marital_status=${values.marital_status}&employment_status=${values.employment_status}&housing_status=${values.housing_status}&phone_number=${values.phone_number}&monthly_income=${values.monthly_income}&monthly_income__gte=${values.monthly_income__gte}&monthly_income__lte=${values.monthly_income__lte}&fullname=${values.fullname}&is_active=${values.is_active}`, {headers: {"Authorization": ""}})
         return res.data;
     } catch (error) {
         console.log(error);
@@ -100,7 +100,9 @@ export const AuthSlice = createSlice({
         isLoggedIn: false,
         isLoading: false,
         error: null,
-        successMsg: null
+        successMsg: null,
+        totalPage: 0,   
+        pageLimit: 10
     },
     reducers: {
         resetAuthSlice : (state) => {
@@ -131,7 +133,7 @@ export const AuthSlice = createSlice({
         })
         builder.addCase(postRegisterAsync.fulfilled, (state, action) => {
             state.isLoading = false;
-            state.successMsg = action.payload;
+            state.successMsg = action.payload.detail;
         })
         builder.addCase(postRegisterAsync.rejected, (state, action) => {
             state.error = action.error.message;
@@ -160,9 +162,10 @@ export const AuthSlice = createSlice({
             // console.log(action.payload.results.map((result) => result.user.first_name));
             state.users = action.payload.results
             // console.log(action.payload.results);
+            state.totalPage = action.payload.count;
         })
         builder.addCase(getAllUsersAsync.rejected, (state, action) => {
-            state.error = action.error.message;
+            state.error = action.error.message; 
         })
 
         //put me

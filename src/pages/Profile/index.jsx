@@ -5,7 +5,7 @@ import EntreprenuerTable from '../../components/Profile/EntreprenuerTable'
 import Orders from '../../components/Profile/Orders'
 import Education from '../../components/Profile/Education'
 import Experience from '../../components/Profile/Experience'
-import { getMeAsync } from '../../redux/AuthSlice/AuthSlice'
+import { getMeAsync, resetAuthSlice } from '../../redux/AuthSlice/AuthSlice'
 import ResponseMessage from '../../components/ResponseMessage'
 import { resetEducationSlice } from '../../redux/EducationSlice/EducationSlice'
 import { resetExperienceSlice } from '../../redux/ExperienceSlice/ExperienceSlice'
@@ -22,6 +22,9 @@ function Profile() {
 
   let successMsgExp = useSelector((state) => state.experience.successMsg)
   let errorExp = useSelector((state) => state.experience.error)
+
+  let successUpdate = useSelector((state) => state.auth.successMsg)
+  let errorUpdate = useSelector((state) => state.auth.error)
 
 
   useEffect(() => {
@@ -46,6 +49,15 @@ function Profile() {
       {
         errorExp ? (<ResponseMessage message={errorExp} type="error" slice={resetExperienceSlice()}/>) : ""
       }
+
+      {
+        successUpdate ? (<ResponseMessage message={successUpdate} type="success" slice={resetAuthSlice()}/>) : ""
+      }
+
+      {
+        errorUpdate ? (<ResponseMessage message={errorUpdate} type="error" slice={resetAuthSlice()}/>) : ""
+      }
+
       <div className='flex flex-col sm:flex-col md:flex-row lg:flex-row xl:flex-row'>
         <div className='w-full sm:w-full md:w-2/5 lg:w-2/5 xl:w-2/5 h-96 border mr-2 rounded drop-shadow mb-2'>
           {
@@ -73,7 +85,7 @@ function Profile() {
             <div className='overflow-auto h-48'>
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>Email:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>
                       {
@@ -88,7 +100,7 @@ function Profile() {
               <hr />
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>Telefon nömrəsi:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>{me.phone_number}</> : "-"
                   }
@@ -97,7 +109,7 @@ function Profile() {
               <hr />
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>Doğum tarixi:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>{me.birthdate}</> : "-"
                   }
@@ -106,7 +118,7 @@ function Profile() {
               <hr />
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>Ünvan:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>{me.address}</> : "-"
                   }
@@ -115,7 +127,7 @@ function Profile() {
               <hr />
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>Evlilik statusu:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>
                       {
@@ -128,7 +140,7 @@ function Profile() {
               <hr />
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>İşləmə statusu:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>
                       {
@@ -141,7 +153,7 @@ function Profile() {
               <hr />
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>Ev statusu:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>
                       {
@@ -154,7 +166,7 @@ function Profile() {
               <hr />
               <div className='w-full flex flex-col md:flex-col lg:flex-col xl:flex-row justify-between'>
                 <p className='text-slate-400'>Kredit kartı nömrəsi:</p>
-                <span>
+                <span className='mr-4'>
                   {
                     me ? <>{me.credit_cart_number}</> : "-"
                   }

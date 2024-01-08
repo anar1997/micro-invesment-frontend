@@ -43,7 +43,7 @@ function EntrepreneurDetail() {
         }
 
         {
-          error ? (<ResponseMessage message={error} type="error" slice={resetInvestmentSlice()} />) : ""
+          error ? (<ResponseMessage message={error} type="error" slice={resetInvestmentSlice()} />) : ""  
         }
 
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8 w-full">

@@ -41,9 +41,7 @@ function ProfileUpdate() {
         },
     });
 
-    let successMsg = useSelector((state) => state.auth.successMsg)
-    let errorMsg = useSelector((state) => state.auth.error)
-
+   
     useEffect(() => {
         dispatch(getMeAsync())
     }, [])
@@ -76,22 +74,7 @@ function ProfileUpdate() {
     return (
         <>
             <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
-                {
-                    errorMsg && (
-                    <div className="error-div">
-                        <span>
-                        {errorMsg}
-                        </span>
-                    </div>)
-                }
-                {
-                    successMsg && (
-                    <div className="error-div">
-                        <span>
-                        {successMsg}
-                        </span>
-                    </div>)
-                }
+                
                 <div className="sm:mx-auto sm:w-full sm:max-w-sm">
                     <h2 className="mt-10 text-center text-2xl font-bold leading-9 tracking-tight text-gray-900">
                         Məlumatları yenilə:

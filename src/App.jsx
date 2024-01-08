@@ -19,6 +19,11 @@ import AddEducation from './components/Profile/Education/AddEducation'
 import AddExperience from './components/Profile/Experience/AddExperience'
 import UpdateEducation from './components/Profile/Education/updateEducation'
 import UpdateExperience from './components/Profile/Experience/UpdateExperience'
+import AddOrder from './pages/AddOrder'
+import AddPicture from './pages/AddOrder/AddPicture'
+import Admin from './pages/Admin'
+import Projects from './components/Admin/Projects'
+import Report from './components/Admin/Report'
 
 
 function App() {
@@ -44,6 +49,10 @@ function App() {
                   <Routes>
                     <Route path='/' element={<Home/>} />
                     <Route path='/about' element={<About/>} />
+                    <Route path='/add-order' element={<Outlet/>}>
+                      <Route path='' element={<AddOrder/>}/>
+                      <Route path='add-picture' element={<AddPicture/>}/>
+                    </Route>
                     <Route path='/entrepreneur-detail/:id' element={<EntrepreneurDetail/>} />
                     <Route path='/profile' element={<Outlet/>}>
                       <Route path='' element={<Profile/>} />
@@ -52,6 +61,11 @@ function App() {
                       <Route path='add-experience' element={<AddExperience/>} />
                       <Route path='update-education/:id' element={<UpdateEducation/>}/>
                       <Route path='update-experience/:id' element={<UpdateExperience/>}/>
+                    </Route>
+                    <Route path='/admin' element={<Outlet/>}>
+                      <Route path='' element={<Admin/>}/>
+                      <Route path='projects' element={<Projects />}/>
+                      <Route path='report' element={<Report />}/>
                     </Route>
                     <Route path='/login' element={<Login/>} />
                     <Route path='/register' element={<Register/>} />

@@ -15,6 +15,7 @@ function FileInput({label, id, name, type, value, onChange, onBlur, touched, err
                 value={value}
                 onChange={onChange}
                 onBlur={onBlur}
+                style={style}
                 className="block w-full text-sm text-slate-500
                 file:mr-4 file:py-2 file:px-4
                 file:rounded-full file:border-0

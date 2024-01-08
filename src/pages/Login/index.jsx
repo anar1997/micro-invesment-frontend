@@ -34,8 +34,6 @@ function Login() {
 
   const access = localStorage.getItem("access");
 
-  const errorMsg = useSelector((state) => state.auth.error);
-
   useEffect(() => {
     if (access != null) {
       navigate("/");
@@ -55,10 +53,10 @@ function Login() {
 
         <div className="flex min-h-full flex-1 flex-col justify-center px-6 py-12 lg:px-8">
         {
-          errorMsg && (
+          error && (
           <div className="error-div">
             <span>
-              {errorMsg}
+              {error}
             </span>
           </div>)
         }

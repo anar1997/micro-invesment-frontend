@@ -74,7 +74,7 @@ function Register() {
             monthly_income__gte: "",
             monthly_income__lte: ""
         }))
-    }, [dispatch])
+    }, [dispatch])  
 
 
     const access = localStorage.getItem("access");
