@@ -37,6 +37,9 @@ const Projects = () => {
         }
     })
 
+        console.log(startDate);
+        console.log(endDate);
+
     useEffect(() => {
         let filteredValues = { ...formik.values };
         dispatch(getAllEntrepreneurAsync(filteredValues));
