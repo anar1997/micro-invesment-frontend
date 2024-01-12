@@ -14,7 +14,7 @@ const UsersTable = () => {
     let totalPage = useSelector((state) => state.auth.totalPage)
     let pageLimit = useSelector((state) => state.auth.pageLimit)
 
-    console.log(users);
+    console.log(users); 
 
     const formik = useFormik({
         initialValues: {

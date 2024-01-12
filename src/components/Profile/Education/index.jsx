@@ -40,7 +40,7 @@ const Education = () => {
 
   return (
     <div className='mt-4 mx-4 flex flex-col overflow-auto h-72'>
-      <NavLink to="add-education" className={`rounded btn-main-bg text-center w-40 h-10 p-2 mb-2`}>Yeni əlavə et</NavLink>
+      <NavLink to="add-education" className={`rounded btn-main-bg text-center w-40 p-2 mb-2`}>Yeni əlavə et</NavLink>
       <table className="table-auto w-full">
         <thead>
           <tr>
@@ -62,9 +62,11 @@ const Education = () => {
             <td className="border border-slate-700 pl-2">{v.start_year}</td>
             <td className="border border-slate-700 pl-2">{v.end_year}</td>
             <td className="border border-slate-700 pl-2">{v.is_continue ? "Bəli" : "Xeyr"}</td>
-            <td className='border-r border-b border-slate-700 flex justify-center'>
-              <NavLink to={`update-education/${v.id}`} className={`px-2 mx-2`}><img className='w-5 h-10 edit' src='/src/assets/icons/edit-icon.svg' alt="" /></NavLink>
-              <NavLink onClick={()=>{showDeleteConfirm(v.id)}} className={`px-2 mx-2`}><img className='w-5 h-10 delete' src='/src/assets/icons/remove.svg' alt="" /></NavLink>
+            <td className='border border-slate-700 pl-2'>
+              <div className='flex justify-center'>
+                <NavLink to={`update-education/${v.id}`} className={`px-2 mx-2`}><div className='w-5 h-10 pt-2 edit'><img src='/src/assets/icons/edit-icon.svg' alt="" /></div></NavLink>
+                <NavLink onClick={()=>{showDeleteConfirm(v.id)}} className={`px-2 mx-2`}><div className='w-5 h-10 pt-1 delete'><img src='/src/assets/icons/remove.svg' alt="" /></div></NavLink>
+              </div>
             </td>
           </tr>
           ))}

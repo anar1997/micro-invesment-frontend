@@ -24,7 +24,7 @@ const Report = () => {
             end_date__gte: "",
             owner: "",
             project_name__icontains: "",
-            is_finished: true,
+            is_finished: "",
             is_active: ""
         },
         onSubmit: (values) => {

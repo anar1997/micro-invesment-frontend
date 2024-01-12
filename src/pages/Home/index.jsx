@@ -6,7 +6,6 @@ import style from "./style.module.css"
 import { getAllEntrepreneurAsync } from '../../redux/EntrepreneurSlice/EntrepreneurSlice';
 import { getMeAsync } from '../../redux/AuthSlice/AuthSlice';
 import { Pagination, DatePicker, Space } from 'antd';
-import EntrepreneurDetail from '../EntrepreneurDetail';
 
 
 function Home() {
@@ -19,19 +18,21 @@ function Home() {
   let pageLimit = useSelector((state) => state.entrepreneur.pageLimit)
   const { RangePicker } = DatePicker;
 
+  console.log(entrepreneurs);
+
   const formik = useFormik({
     initialValues: {
       offset: "",
-      start_date: "",
-      end_date: "",
+      start_date__gte: "",
+      end_date__gte: "",
       owner: "",
-      project_name_icontains: "",
-      is_finished: false,
-      is_active: true
+      project_name__icontains: "",
+      is_finished: "",
+      is_active: ""
     },
     onSubmit: (values) => {
-      values.start_date = startDate;
-      values.end_date = endDate;
+      values.start_date__gte = startDate;
+      values.end_date__gte = endDate;
       let filteredValues = { ...values };
       dispatch(getAllEntrepreneurAsync(filteredValues));
     },
